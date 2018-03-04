@@ -10,17 +10,23 @@ var app = express();
 
 app.use(express.static(publicPath));
 
-// app.listen(port, () =>{
-//     console.log(`Server is running on ${port}`)
-// });
+app.listen(port, () =>{
+    console.log(`Server is running on ${port}`)
+});
 
+// Implementation of sockets:
 var server = http.createServer(app);
 
 var io = socketIO(server)
 
-server.listen(port, ()=> {
-    console.log(`Server is running on ${port}`)
-})
+// Working code:
+// server.listen(port, ()=> {
+//     console.log(`Server is running on ${port}`)
+// })
+
+server.listen(65080, ()=> {
+    console.log('Server is running on Port 65080');
+});
 
 io.on('connection',(socket) =>{
     console.log("New Socket Connection - New user created");
