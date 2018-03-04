@@ -10,14 +10,22 @@ var app = express();
 
 app.use(express.static(publicPath));
 
-app.listen(port, () =>{
-    console.log(`Server is running on ${port}`)
-});
-
-// var server = http.createServer(app);
-
-// var io = socketIO(server)
-
-// server.listen(port, ()=> {
+// app.listen(port, () =>{
 //     console.log(`Server is running on ${port}`)
-// })
+// });
+
+var server = http.createServer(app);
+
+var io = socketIO(server)
+
+server.listen(port, ()=> {
+    console.log(`Server is running on ${port}`)
+})
+
+io.on('connection',(socket) =>{
+    console.log("New Socket Connection - New user created");
+
+    socket.on('disconnect',()=>{
+        console.log("Connection terminated");
+    });
+});
