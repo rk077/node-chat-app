@@ -26,19 +26,12 @@ var io = socketIO(server)
 // })
 
 server.listen(65080, ()=> {
-    console.log('Server is running on Port 65080');
-    fs.writeFile("/tmp/test", "Server is running on Port 65080", function(err) {
-        if(err) {
-            return console.log(err);
-        }
-
-        console.log("The file was saved!");
-    }); 
+    console.log('Server is running on Port 65080'); 
 });
 
 io.on('connection',(socket) =>{
     console.log("New Socket Connection - New user created");
-
+    socket.emit('news', { hello: 'world' });
     socket.on('disconnect',()=>{
         console.log("Connection terminated");
     });
