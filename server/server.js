@@ -1,6 +1,7 @@
 const express = require('express')
 const socketIO = require('socket.io')
 const http = require('http')
+const fs = require('fs')
 
 const path = require('path')
 const port = process.env.port || 8080;
@@ -26,6 +27,13 @@ var io = socketIO(server)
 
 server.listen(65080, ()=> {
     console.log('Server is running on Port 65080');
+    fs.writeFile("/tmp/test", "Server is running on Port 65080", function(err) {
+        if(err) {
+            return console.log(err);
+        }
+
+        console.log("The file was saved!");
+    }); 
 });
 
 io.on('connection',(socket) =>{
